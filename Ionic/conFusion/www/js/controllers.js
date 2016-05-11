@@ -150,10 +150,10 @@ angular.module('conFusion.controllers', [])
                     $scope.feedbackForm.$setPristine();
                     console.log($scope.feedback);
                 }
-            };
+            }; 
         }])
 
-        .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', '$ionicPopover', 'favoriteFactory', '$ionicModal', '$ionicTimeout', function($scope, $stateParams, menuFactory, baseURL, $ionicPopover,favoriteFactory, $ionicModal, $ionicTimeout) {
+        .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', '$ionicPopover', 'favoriteFactory', '$ionicModal', '$timeout', function($scope, $stateParams, menuFactory, baseURL, $ionicPopover,favoriteFactory, $ionicModal, $timeout) {
             
             $scope.baseURL = baseURL;
             $scope.dish = {};
