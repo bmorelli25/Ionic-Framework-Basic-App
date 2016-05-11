@@ -1,6 +1,6 @@
 <ion-modal-view>
   <ion-header-bar>
-    <h1 class="title">Login</h1>
+    <h1 class="title">Add Comment</h1>
     <div class="buttons">
       <button class="button button-clear" ng-click="closeCommentModal()">Close</button>
     </div>
@@ -8,16 +8,27 @@
   <ion-content>
     <form ng-submit="doComment()">
       <div class="list">
+        
+        <label class="item item-input item-select">
+                    <span class="input-label">Rating</span>
+                    <select ng-model="commentData.rating">
+                        <option ng-repeat="n in [1,2,3,4,5]" value="{{n}}">{{n}}</option>
+                    </select>
+                </label>
+          
+          
         <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="commentData.username">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="commentData.author">
         </label>
+        
         <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="commentData.password">
+          <span class="input-label">Comment</span>
+            <textarea type="text" ng-model="commentData.comment"></textarea>
         </label>
+        
         <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
+          <button class="button button-block button-positive" type="submit">Submit Comment</button>
         </label>
       </div>
     </form>

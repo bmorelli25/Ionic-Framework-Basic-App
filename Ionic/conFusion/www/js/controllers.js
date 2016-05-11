@@ -208,14 +208,24 @@ angular.module('conFusion.controllers', [])
 
               // Perform the login action when the user submits the login form
               $scope.doComment = function() {
-                console.log('Doing Comment', $scope.CommentData);
+                
+                 
+                $scope.commentData.date = new Date().toISOString();  
+                console.log('Doing Comment', $scope.commentData);
+                
+                $scope.dish.comments.push($scope.commentData);
+                  menuFactory.getDishes().update({id:$scope.dish.id},$scope.dish);
+                //$scope.commentForm.$setPristine();
+                
+                //$scope.mycomment = {rating:5, comment:"", author:"", date:""};
 
                 // Simulate a login delay. Remove this and replace with your login
                 // code if using a login system
                 $timeout(function() {
-                  $scope.closeComment();
+                  $scope.closeCommentModal();
                 }, 1000);
               };
+            
                  
         }])
 
