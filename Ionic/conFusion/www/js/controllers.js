@@ -153,12 +153,19 @@ angular.module('conFusion.controllers', [])
             };
         }])
 
-        .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', function($scope, $stateParams, menuFactory, baseURL) {
+        .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', 'baseURL', '$ionicPopover', 'favoriteFactory', '$ionicModal', '$ionicTimeout', function($scope, $stateParams, menuFactory, baseURL, $ionicPopover,favoriteFactory, $ionicModal, $ionicTimeout) {
             
             $scope.baseURL = baseURL;
             $scope.dish = {};
             $scope.showDish = false;
             $scope.message="Loading ...";
+            
+            
+            $ionicPopover.fromTemplateUrl('templates/dish-detail-popover.html', {
+                scope: $scope
+            }).then(function(popover) {
+                $scope.dishDetailPopover = popover;
+            });
             
             $scope.dish = menuFactory.getDishes().get({id:parseInt($stateParams.id,10)})
             .$promise.then(
@@ -171,7 +178,45 @@ angular.module('conFusion.controllers', [])
                             }
             );
 
+                        
+            $scope.addFavorite = function (index) {
+                console.log("index is " + index);
+                favoriteFactory.addToFavorites(index);
+                $scope.dishDetailPopover.hide();
+            };
             
+              // Form data for the comment modal
+              $scope.commentData = {};
+
+              // Create the comment modal
+              $ionicModal.fromTemplateUrl('templates/dish-comment.html', {
+                scope: $scope
+              }).then(function(modal) {
+                $scope.commentModal = modal;
+              });
+
+              // Triggered in the comment modal to close it
+              $scope.closeCommentModal = function() {
+                $scope.commentModal.hide();
+              };
+
+              // Open the login modal
+              $scope.openCommentModal = function() {
+                $scope.dishDetailPopover.hide();
+                $scope.commentModal.show();
+              };
+
+              // Perform the login action when the user submits the login form
+              $scope.doComment = function() {
+                console.log('Doing Comment', $scope.CommentData);
+
+                // Simulate a login delay. Remove this and replace with your login
+                // code if using a login system
+                $timeout(function() {
+                  $scope.closeComment();
+                }, 1000);
+              };
+                 
         }])
 
         .controller('DishCommentController', ['$scope', 'menuFactory', function($scope,menuFactory) {
