@@ -22,3 +22,7 @@ Start the ionic server:
 ```
 ionic serve --lab
 ```
+
+
+###### **This project consists of assignments from Coursera's [Hybrid Mobile Development](https://www.coursera.org/learn/hybrid-mobile-development) course.
+
